@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Add User</h3>
+<form action="#" th:action="@{/user/add}" th:object="${user}" method="post">
+    <input type="text" placeholder="First Name" th:field="*{firstName}" />
+    <input type="text" placeholder="Last Name" th:field="*{lastName}" />
+    <input type="email" placeholder="Email" th:field="*{email}" />
+    <input type="submit" />
+    <!--<select>-->
+        <!--<option th:each="state : ${T(com.epam.mentorship.spring.mvc.model.Level).values()}"-->
+                <!--th:value="${state}"-->
+                <!--th:text="${state}">-->
+        <!--</option>-->
+    <!--</select>-->
+</form>
+</body>
+</html>
