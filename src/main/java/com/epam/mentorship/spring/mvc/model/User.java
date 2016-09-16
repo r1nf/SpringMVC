@@ -1,18 +1,27 @@
 package com.epam.mentorship.spring.mvc.model;
 
+import javax.persistence.*;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private Level level;
 
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String email, Level level) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, Level level) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -21,10 +30,6 @@ public class User {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
