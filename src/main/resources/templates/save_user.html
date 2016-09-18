@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add new user</title>
+    <title>Save user</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h3>Add User</h3>
-<form action="#" th:action="@{/user/add}" th:object="${user}" method="post">
-    <input type="text" placeholder="First Name" th:field="*{firstName}" />
-    <input type="text" placeholder="Last Name" th:field="*{lastName}" />
+<h3>Save user</h3>
+<form action="#" th:action="@{/user/save}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" pattern="[A-Za-z]+" placeholder="First Name" th:field="*{firstName}" />
+    <input type="text" pattern="[A-Za-z]+(\-[A-Za-z]+)?" placeholder="Last Name" th:field="*{lastName}" />
     <input type="email" placeholder="Email" th:field="*{email}" />
     <label>
         <select th:field="*{level}">
@@ -19,7 +20,7 @@
             </option>
         </select>
     </label>
-    <input type="submit" />
+    <input type="submit" value="Save"/>
 </form>
 </body>
 </html>

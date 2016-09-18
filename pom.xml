@@ -39,6 +39,13 @@
 			<scope>test</scope>
 		</dependency>
 
+        <!--https://github.com/thymeleaf/thymeleaf-extras-java8time-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-java8time</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+
 		<!-- for db -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

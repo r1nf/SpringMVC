@@ -11,30 +11,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/get/all")
+    public ModelAndView showAllUsers() {
+        List<User> userList = userService.getAllUsers();
+        ModelAndView modelAndView = new ModelAndView("user_list");
+        modelAndView.addObject("users", userList);
+        return modelAndView;
+    }
 
-    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showAddUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "add_user";
+        return "save_user";
     }
 
-    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute(value="user") User user) {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveUser(@ModelAttribute(value = "user") User user) {
         userService.addUser(user);
-        return "add_user";
+        return "redirect:/user/get/all";
     }
 
-    @RequestMapping(value = "/user/get/{id}", method = RequestMethod.GET)
-    public ModelAndView showUserInfo(@PathVariable Long id) {
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public ModelAndView showUser(@PathVariable Long id) {
         User user = userService.getUserById(id);
         ModelAndView mav = new ModelAndView("show_user");
         mav.addObject("user", user);
         return mav;
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView editUser(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        ModelAndView mav = new ModelAndView("save_user");
+        mav.addObject("user", user);
+        return mav;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return new ModelAndView("redirect:/user/get/all");
     }
 }
