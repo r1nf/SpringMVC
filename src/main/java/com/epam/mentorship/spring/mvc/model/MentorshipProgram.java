@@ -1,32 +1,40 @@
 package com.epam.mentorship.spring.mvc.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "mentorship")
 public class MentorshipProgram {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
+    @ManyToMany
+    @JoinTable(name="user_mentorship",
+            joinColumns=
+            @JoinColumn(name="mentorship_id", referencedColumnName="id"),
+            inverseJoinColumns=
+            @JoinColumn(name="user_id", referencedColumnName="id")
+    )
     private Set<User> members;
 
     public MentorshipProgram() {
     }
 
-    public MentorshipProgram(String name, Date startDate, Date endDate, Set<User> members) {
+    public MentorshipProgram(String name, LocalDate startDate, LocalDate endDate, Set<User> members) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -45,19 +53,19 @@ public class MentorshipProgram {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

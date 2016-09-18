@@ -10,13 +10,16 @@
     <input type="text" placeholder="First Name" th:field="*{firstName}" />
     <input type="text" placeholder="Last Name" th:field="*{lastName}" />
     <input type="email" placeholder="Email" th:field="*{email}" />
+    <label>
+        <select th:field="*{level}">
+            <option th:each="state : ${T(com.epam.mentorship.spring.mvc.model.Level).values()}"
+                    th:value="${state}"
+                    th:text="${state}"
+            >
+            </option>
+        </select>
+    </label>
     <input type="submit" />
-    <!--<select>-->
-        <!--<option th:each="state : ${T(com.epam.mentorship.spring.mvc.model.Level).values()}"-->
-                <!--th:value="${state}"-->
-                <!--th:text="${state}">-->
-        <!--</option>-->
-    <!--</select>-->
 </form>
 </body>
 </html>
