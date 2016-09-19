@@ -16,17 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-//@RequestMapping(value = "/mprogram")
+@RequestMapping(value = "/mprogram")
 public class MentorshipProgramController {
 
     @Autowired
     private MentorshipProgramService mentorshipProgramService;
-
-    @RequestMapping(value = "/error")
-    public ModelAndView error() {
-        return new ModelAndView("error/404");
-
-    }
 
     @RequestMapping(value = "/get/all")
     public ModelAndView showAllMentorshipPrograms() {
@@ -35,37 +29,4 @@ public class MentorshipProgramController {
         modelAndView.addObject("mprograms", mentorshipProgramList);
         return modelAndView;
     }
-//    @RequestMapping(value = "/add", method = RequestMethod.GET)
-//    public String showAddUserForm(Model model) {
-//        model.addAttribute("user", new User());
-//        return "save_user";
-//    }
-//
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public String saveUser(@ModelAttribute(value = "user") User user) {
-//        userService.addUser(user);
-//        return "redirect:/user/get/all";
-//    }
-//
-//    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-//    public ModelAndView showUser(@PathVariable Long id) {
-//        User user = userService.getUserById(id);
-//        ModelAndView mav = new ModelAndView("show_user");
-//        mav.addObject("user", user);
-//        return mav;
-//    }
-//
-//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-//    public ModelAndView editUser(@PathVariable Long id) {
-//        User user = userService.getUserById(id);
-//        ModelAndView mav = new ModelAndView("save_user");
-//        mav.addObject("user", user);
-//        return mav;
-//    }
-//
-//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//    public ModelAndView deleteUser(@PathVariable Long id) {
-//        userService.deleteUser(id);
-//        return new ModelAndView("redirect:/user/get/all");
-//    }
 }

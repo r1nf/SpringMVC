@@ -7,10 +7,14 @@
 <body>
 <h3>Save user</h3>
 <form action="#" th:action="@{/user/save}" th:object="${user}" method="post">
-    <input type="hidden" th:field="*{id}" />
-    <p><input type="text" required="required" pattern="[A-Za-z]+" placeholder="First Name" th:field="*{firstName}" /> <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></p>
-    <p><input type="text" required="required" pattern="[A-Za-z]+(\-[A-Za-z]+)?" placeholder="Last Name" th:field="*{lastName}" /> <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></p>
-    <p><input type="email" required="required" placeholder="Email" th:field="*{email}" /> <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></p>
+    <input type="hidden" th:field="*{id}"/>
+    <p><input type="text" required="required" pattern="[A-Za-z]+" placeholder="First Name" th:field="*{firstName}"/>
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></p>
+    <p><input type="text" required="required" pattern="[A-Za-z]+(\-[A-Za-z]+)?" placeholder="Last Name"
+              th:field="*{lastName}"/> <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+    </p>
+    <p><input type="email" required="required" placeholder="Email" th:field="*{email}"/> <span
+            th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></p>
     <p><label>
         <select th:field="*{level}" required="required">
             <option th:each="state : ${T(com.epam.mentorship.spring.mvc.model.Level).values()}"

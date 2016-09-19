@@ -49,11 +49,15 @@ public class UserController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ModelAndView showUser(@PathVariable Long id) {
-        if (id == 0) throw new PageNotFound();
+        if (id == null || id <= 0) throw new PageNotFound();
         User user = userService.getUserById(id);
-        ModelAndView mav = new ModelAndView("show_user");
-        mav.addObject("user", user);
-        return mav;
+        if (user != null) {
+            ModelAndView mav = new ModelAndView("show_user");
+            mav.addObject("user", user);
+            return mav;
+        } else {
+            throw new PageNotFound();
+        }
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
