@@ -1,6 +1,6 @@
 package com.epam.mentorship.spring.mvc.controller;
 
-import com.epam.mentorship.spring.mvc.error.PageNotFound;
+import com.epam.mentorship.spring.mvc.error.PageNotFoundException;
 import com.epam.mentorship.spring.mvc.model.User;
 import com.epam.mentorship.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,14 +49,14 @@ public class UserController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ModelAndView showUser(@PathVariable Long id) {
-        if (id == null || id <= 0) throw new PageNotFound();
+        if (id == null || id <= 0) throw new PageNotFoundException();
         User user = userService.getUserById(id);
         if (user != null) {
             ModelAndView mav = new ModelAndView("show_user");
             mav.addObject("user", user);
             return mav;
         } else {
-            throw new PageNotFound();
+            throw new PageNotFoundException();
         }
     }
 
