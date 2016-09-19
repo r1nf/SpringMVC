@@ -1,6 +1,7 @@
 package com.epam.mentorship.spring.mvc.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -14,12 +15,15 @@ public class MentorshipProgram {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "start_date")
+    @NotNull
     private LocalDate startDate;
 
     @Column(name = "end_date")
+    @NotNull
     private LocalDate endDate;
 
     @ManyToMany
@@ -34,15 +38,18 @@ public class MentorshipProgram {
     public MentorshipProgram() {
     }
 
-    public MentorshipProgram(String name, LocalDate startDate, LocalDate endDate, Set<User> members) {
+    public MentorshipProgram(String name, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.members = members;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mentorship programs</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(mprograms)}">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="mprogram : ${mprograms}">
+            <td th:text="${mprogram.name}"></td>
+            <td th:text="${#temporals.format(mprogram.startDate, 'dd/MM/yyyy')}"></td>
+            <td th:text="${mprogram.endDate}"></td>
+            <td><a th:href="@{../get/{path}(path=${mprogram.id})}">details</a>
+                <a th:href="@{../edit/{path}(path=${mprogram.id})}">edit</a>
+                <a th:href="@{../delete/{path}(path=${mprogram.id})}">delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div th:if="${#lists.isEmpty(mprograms)}">
+    <p>There is no any mentorship program.</p>
+    <p><a th:href="@{../add}">Add user.</a></p>
+</div>
+
+</body>
+</html>

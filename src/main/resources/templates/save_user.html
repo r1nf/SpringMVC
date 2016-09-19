@@ -8,19 +8,19 @@
 <h3>Save user</h3>
 <form action="#" th:action="@{/user/save}" th:object="${user}" method="post">
     <input type="hidden" th:field="*{id}" />
-    <input type="text" pattern="[A-Za-z]+" placeholder="First Name" th:field="*{firstName}" />
-    <input type="text" pattern="[A-Za-z]+(\-[A-Za-z]+)?" placeholder="Last Name" th:field="*{lastName}" />
-    <input type="email" placeholder="Email" th:field="*{email}" />
-    <label>
-        <select th:field="*{level}">
+    <p><input type="text" required="required" pattern="[A-Za-z]+" placeholder="First Name" th:field="*{firstName}" /> <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></p>
+    <p><input type="text" required="required" pattern="[A-Za-z]+(\-[A-Za-z]+)?" placeholder="Last Name" th:field="*{lastName}" /> <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></p>
+    <p><input type="email" required="required" placeholder="Email" th:field="*{email}" /> <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></p>
+    <p><label>
+        <select th:field="*{level}" required="required">
             <option th:each="state : ${T(com.epam.mentorship.spring.mvc.model.Level).values()}"
                     th:value="${state}"
-                    th:text="${state}"
-            >
+                    th:text="${state}">
             </option>
         </select>
     </label>
-    <input type="submit" value="Save"/>
+    </p>
+    <p><input type="submit" value="Save"/></p>
 </form>
 </body>
 </html>
