@@ -1,17 +1,15 @@
 package com.epam.mentorship.spring.mvc.controller;
 
 import com.epam.mentorship.spring.mvc.model.MentorshipProgram;
-import com.epam.mentorship.spring.mvc.model.User;
 import com.epam.mentorship.spring.mvc.service.MentorshipProgramService;
-import com.epam.mentorship.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -22,11 +20,17 @@ public class MentorshipProgramController {
     @Autowired
     private MentorshipProgramService mentorshipProgramService;
 
+    // RESTful method
+    @RequestMapping(value="/get/all", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody List<MentorshipProgram> listAllMentorshipProgramsWithMarshaling() {
+        return mentorshipProgramService.getAllMentorshipPrograms();
+    }
+
+    // View-based method
     @RequestMapping(value = "/get/all")
-    public ModelAndView showAllMentorshipPrograms() {
-        List<MentorshipProgram> mentorshipProgramList = mentorshipProgramService.getAllMentorshipPrograms();
-        ModelAndView modelAndView = new ModelAndView("list_mentorsip_program");
-        modelAndView.addObject("mprograms", mentorshipProgramList);
-        return modelAndView;
+    public String listWithView(Model model) {
+        model.addAttribute("mprograms", listAllMentorshipProgramsWithMarshaling());
+        return "list_mentorsip_program";
     }
 }
