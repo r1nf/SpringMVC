@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "mentorship")
@@ -39,7 +39,7 @@ public class MentorshipProgram {
             @JoinColumn(name="user_id", referencedColumnName="id")
     )
     @JsonIgnore
-    private Set<User> members;
+    private List<User> members;
 
     public MentorshipProgram() {
     }
@@ -82,7 +82,11 @@ public class MentorshipProgram {
         this.endDate = endDate;
     }
 
-    public Set<User> getMembers() {
+    public List<User> getMembers() {
         return members;
+    }
+
+    public void setMembers(List<User> members) {
+        this.members = members;
     }
 }

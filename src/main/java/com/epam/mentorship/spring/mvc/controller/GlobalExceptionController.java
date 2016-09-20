@@ -14,14 +14,15 @@ public class GlobalExceptionController {
     @ExceptionHandler(PageNotFoundException.class)
     public ModelAndView handleAllException(PageNotFoundException e) {
         ModelAndView model = new ModelAndView("error/404");
-        //TODO log error, add to model and show message
         return model;
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(Exception e) throws Exception {
-        ModelAndView model = new ModelAndView("error/404");
+        e.printStackTrace();
+        //TODO log error
+        ModelAndView model = new ModelAndView("error/500");
         return model;
     }
 

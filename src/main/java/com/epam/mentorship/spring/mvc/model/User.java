@@ -3,7 +3,7 @@ package com.epam.mentorship.spring.mvc.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -33,7 +33,7 @@ public class User {
     private Level level;
 
     @ManyToMany(mappedBy = "members")
-    private Set<MentorshipProgram> mentorshipPrograms;
+    private List<MentorshipProgram> mentorshipPrograms;
 
     public User() {
     }
@@ -85,7 +85,11 @@ public class User {
         this.level = level;
     }
 
-    public Set<MentorshipProgram> getMentorshipPrograms() {
+    public List<MentorshipProgram> getMentorshipPrograms() {
         return mentorshipPrograms;
+    }
+
+    public void setMentorshipPrograms(List<MentorshipProgram> mentorshipPrograms) {
+        this.mentorshipPrograms = mentorshipPrograms;
     }
 }

@@ -60,7 +60,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id:[\\d]+}", method = RequestMethod.GET)
     public ModelAndView editUser(@PathVariable Long id) {
         User user = userService.getUserById(id);
         ModelAndView mav = new ModelAndView("save_user");
@@ -68,7 +68,7 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id:[\\d]+}", method = RequestMethod.GET)
     public ModelAndView deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return new ModelAndView("redirect:/user/get/all");
