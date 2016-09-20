@@ -1,29 +1,37 @@
 package com.epam.mentorship.spring.mvc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "mentorship")
+@XmlRootElement
 public class MentorshipProgram {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @XmlAttribute
     private Long id;
 
     @Column(name = "name")
     @NotNull
+    @XmlAttribute
     private String name;
 
     @Column(name = "start_date")
     @NotNull
+    @XmlAttribute
     private LocalDate startDate;
 
     @Column(name = "end_date")
     @NotNull
+    @XmlAttribute
     private LocalDate endDate;
 
     @ManyToMany
@@ -33,6 +41,8 @@ public class MentorshipProgram {
             inverseJoinColumns=
             @JoinColumn(name="user_id", referencedColumnName="id")
     )
+    @JsonIgnore
+    @XmlTransient
     private Set<User> members;
 
     public MentorshipProgram() {

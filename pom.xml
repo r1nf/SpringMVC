@@ -39,6 +39,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- xml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
         <!--https://github.com/thymeleaf/thymeleaf-extras-java8time-->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
