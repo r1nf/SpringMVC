@@ -4,13 +4,12 @@ import com.epam.mentorship.spring.mvc.error.PageNotFoundException;
 import com.epam.mentorship.spring.mvc.model.User;
 import com.epam.mentorship.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -24,11 +23,33 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/get/all")
-    public ModelAndView showAllUsers() {
-        List<User> userList = userService.getAllUsers();
-        ModelAndView modelAndView = new ModelAndView("user_list");
-        modelAndView.addObject("users", userList);
-        return modelAndView;
+    public String showAllUsers(Model model) {
+        model.addAttribute("users", listAllUsersWithMarshaling());
+        return "user_list";
+    }
+
+    @RequestMapping(value="/get/all", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody List<User> listAllUsersWithMarshaling() {
+        return userService.getAllUsers();
+    }
+
+    @RequestMapping(value = "/get/{id:[\\d]+}", method = RequestMethod.GET)
+    public String showUser(@PathVariable Long id, Model model) {
+        model.addAttribute("user", showUserWithMarshaling(id));
+        return "show_user";
+    }
+
+    @RequestMapping(value = "/get/{id:[\\d]+}", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    public User showUserWithMarshaling(@PathVariable Long id) {
+        if (id == null || id <= 0) throw new PageNotFoundException();
+        User user = userService.getUserById(id);
+        if (user == null) {
+            throw new PageNotFoundException();
+        } else {
+            return user;
+        }
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -47,25 +68,10 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/get/{id:[\\d]+}", method = RequestMethod.GET)
-    public ModelAndView showUser(@PathVariable Long id) {
-        if (id == null || id <= 0) throw new PageNotFoundException();
-        User user = userService.getUserById(id);
-        if (user != null) {
-            ModelAndView mav = new ModelAndView("show_user");
-            mav.addObject("user", user);
-            return mav;
-        } else {
-            throw new PageNotFoundException();
-        }
-    }
-
     @RequestMapping(value = "/edit/{id:[\\d]+}", method = RequestMethod.GET)
-    public ModelAndView editUser(@PathVariable Long id) {
-        User user = userService.getUserById(id);
-        ModelAndView mav = new ModelAndView("save_user");
-        mav.addObject("user", user);
-        return mav;
+    public String editUser(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "save_user";
     }
 
     @RequestMapping(value = "/delete/{id:[\\d]+}", method = RequestMethod.GET)
