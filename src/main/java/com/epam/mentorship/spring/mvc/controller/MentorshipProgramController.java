@@ -21,8 +21,7 @@ public class MentorshipProgramController {
     private MentorshipProgramService mentorshipProgramService;
 
     // RESTful method
-//    @RequestMapping(value="/get/all", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_XML_VALUE})
-    @RequestMapping(value="/get/all", produces={"application/xml", "application/json"})
+    @RequestMapping(value="/get/all", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody List<MentorshipProgram> listAllMentorshipProgramsWithMarshaling() {
         return mentorshipProgramService.getAllMentorshipPrograms();

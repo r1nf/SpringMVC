@@ -47,7 +47,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get/{id:[\\d]+}", method = RequestMethod.GET)
     public ModelAndView showUser(@PathVariable Long id) {
         if (id == null || id <= 0) throw new PageNotFoundException();
         User user = userService.getUserById(id);

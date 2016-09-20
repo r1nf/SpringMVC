@@ -52,6 +52,11 @@
             <version>2.1.0.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
 		<!-- for db -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
