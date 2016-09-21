@@ -85,11 +85,11 @@ public class User {
         this.level = level;
     }
 
-    public List<MentorshipProgram> getMentorshipPrograms() {
-        return mentorshipPrograms;
-    }
-
-    public void setMentorshipPrograms(List<MentorshipProgram> mentorshipPrograms) {
-        this.mentorshipPrograms = mentorshipPrograms;
-    }
+//    public List<MentorshipProgram> getMentorshipPrograms() {
+//        return mentorshipPrograms;
+//    }
+//
+//    public void setMentorshipPrograms(List<MentorshipProgram> mentorshipPrograms) {
+//        this.mentorshipPrograms = mentorshipPrograms;
+//    }
 }
