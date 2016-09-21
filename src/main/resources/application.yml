@@ -2,6 +2,7 @@ spring:
   datasource:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:mentorship;MODE=PostgreSQL
+    data: classpath:/db/data.sql
   jpa:
     show-sql: true
     hibernate:
