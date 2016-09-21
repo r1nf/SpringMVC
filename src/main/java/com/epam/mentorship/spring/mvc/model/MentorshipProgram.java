@@ -2,6 +2,7 @@ package com.epam.mentorship.spring.mvc.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class MentorshipProgram {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private Long id;
 
     @Column(name = "name")

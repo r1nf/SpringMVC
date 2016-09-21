@@ -1,5 +1,6 @@
 package com.epam.mentorship.spring.mvc.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,6 +13,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JacksonXmlProperty(isAttribute = true)
     private Long id;
 
     @Column(name = "first_name")
@@ -85,11 +87,11 @@ public class User {
         this.level = level;
     }
 
-//    public List<MentorshipProgram> getMentorshipPrograms() {
-//        return mentorshipPrograms;
-//    }
-//
-//    public void setMentorshipPrograms(List<MentorshipProgram> mentorshipPrograms) {
-//        this.mentorshipPrograms = mentorshipPrograms;
-//    }
+    public List<MentorshipProgram> getMentorshipPrograms() {
+        return mentorshipPrograms;
+    }
+
+    public void setMentorshipPrograms(List<MentorshipProgram> mentorshipPrograms) {
+        this.mentorshipPrograms = mentorshipPrograms;
+    }
 }

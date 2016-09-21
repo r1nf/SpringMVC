@@ -42,7 +42,7 @@ public class UserController {
 
     @RequestMapping(value = "/get/{id:[\\d]+}", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public User showUserWithMarshaling(@PathVariable Long id) {
+    public @ResponseBody User showUserWithMarshaling(@PathVariable Long id) {
         if (id == null || id <= 0) throw new PageNotFoundException();
         User user = userService.getUserById(id);
         if (user == null) {
