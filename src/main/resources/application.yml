@@ -7,5 +7,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-    repositories:
-      enabled: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
