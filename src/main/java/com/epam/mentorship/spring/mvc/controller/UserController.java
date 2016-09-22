@@ -25,7 +25,7 @@ public class UserController {
     @RequestMapping(value = "/get/all")
     public String showAllUsers(Model model) {
         model.addAttribute("users", listAllUsersWithMarshaling());
-        return "user_list";
+        return "list_user";
     }
 
     @RequestMapping(value="/get/all", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
