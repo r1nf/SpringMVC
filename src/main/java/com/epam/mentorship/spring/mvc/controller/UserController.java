@@ -63,7 +63,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "save_user";
         } else {
-            userService.save(user);
+            userService.saveUser(user);
             return "redirect:/user/get/all";
         }
     }
