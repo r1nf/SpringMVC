@@ -36,6 +36,9 @@ public class MentorshipProgram {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
+    @Embedded
+    private ModifiedEmbed modifiedEmbed;
+
     @ManyToMany
     @JoinTable(name="user_mentorship",
             joinColumns=
@@ -93,5 +96,13 @@ public class MentorshipProgram {
 
     public void setMembers(List<User> members) {
         this.members = members;
+    }
+
+    public ModifiedEmbed getModifiedEmbed() {
+        return modifiedEmbed;
+    }
+
+    public void setModifiedEmbed(ModifiedEmbed modifiedEmbed) {
+        this.modifiedEmbed = modifiedEmbed;
     }
 }

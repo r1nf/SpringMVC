@@ -1,6 +1,7 @@
 package com.epam.mentorship.spring.mvc.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,6 +34,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "level")
     private Level level;
+
+    @Embedded
+    private ModifiedEmbed modifiedEmbed;
 
     @ManyToMany(mappedBy = "members")
     private List<MentorshipProgram> mentorshipPrograms;
@@ -93,5 +97,13 @@ public class User {
 
     public void setMentorshipPrograms(List<MentorshipProgram> mentorshipPrograms) {
         this.mentorshipPrograms = mentorshipPrograms;
+    }
+
+    public ModifiedEmbed getModifiedEmbed() {
+        return modifiedEmbed;
+    }
+
+    public void setModifiedEmbed(ModifiedEmbed modifiedEmbed) {
+        this.modifiedEmbed = modifiedEmbed;
     }
 }

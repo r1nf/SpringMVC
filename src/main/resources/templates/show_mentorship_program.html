@@ -9,5 +9,11 @@
     <p><span>Name: </span><span th:text="${mprogram.name}"></span></p>
     <p><span>Start: </span><span th:text="${mprogram.startDate}"></span></p>
     <p><span>End: </span><span th:text="${mprogram.endDate}"></span></p>
+    <div th:if="${mprogram.modifiedEmbed != null}">
+        <p><span>Created by user: </span><span th:text="${mprogram.modifiedEmbed.createdByUser}"></span></p>
+        <p><span>Creation date: </span><span th:text="${mprogram.modifiedEmbed.createdDate}"></span></p>
+        <p><span>Modified by user: </span><span th:text="${mprogram.modifiedEmbed.modifiedByUser}"></span></p>
+        <p><span>Modification date: </span><span th:text="${mprogram.modifiedEmbed.modifiedDate}"></span></p>
+    </div>
 </body>
 </html>

@@ -6,9 +6,15 @@
 </head>
 <body>
 <h3>User information:</h3>
-<p th:text="${user.firstName}"></p>
-<p th:text="${user.lastName}"></p>
-<p th:text="${user.level}"></p>
-<p th:text="${user.email}"></p>
+<p><span>First Name: </span><span th:text="${user.firstName}"></span></p>
+<p><span>Last Name: </span><span th:text="${user.lastName}"></span></p>
+<p><span>Level: </span><span th:text="${user.level}"></span></p>
+<p><span>Email: </span><span th:text="${user.email}"></span></p>
+<div th:if="${user.modifiedEmbed != null}">
+    <p><span>Created by user: </span><span th:text="${user.modifiedEmbed.createdByUser}"></span></p>
+    <p><span>Creation date: </span><span th:text="${user.modifiedEmbed.createdDate}"></span></p>
+    <p><span>Modified by user: </span><span th:text="${user.modifiedEmbed.modifiedByUser}"></span></p>
+    <p><span>Modification date: </span><span th:text="${user.modifiedEmbed.modifiedDate}"></span></p>
+</div>
 </body>
 </html>
