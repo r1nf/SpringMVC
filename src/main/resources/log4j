@@ -1,0 +1,28 @@
+<appender name="InfoFileAppender" class="org.apache.log4j.rolling.RollingFileAppender">
+    <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="FileNamePattern" value="/var/output/Info_%d{ddMMyyyy}.log"/>
+    </rollingPolicy>
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p %t %c{2} - %m%n"/>
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+        <param name="levelMin" value="INFO"/>
+        <param name="levelMax" value="INFO"/>
+    </filter>
+</appender>
+
+<appender name="ErrorFileAppender" class="org.apache.log4j.rolling.RollingFileAppender">
+    <param name="Threshold" value="ERROR"/>
+    <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="FileNamePattern" value="/var/output/Error_%d{ddMMyyyy}.log"/>
+    </rollingPolicy>
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p %t %c{2} - %m%n"/>
+    </layout>
+</appender>
+
+<root>
+    <level value="INFO"/>
+    <appender-ref ref="InfoFileAppender"/>
+    <appender-ref ref="ErrorFileAppender"/>
+</root>
