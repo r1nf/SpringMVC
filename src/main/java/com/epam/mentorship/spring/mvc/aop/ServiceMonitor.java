@@ -8,6 +8,7 @@ import com.epam.mentorship.spring.mvc.service.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -28,14 +29,14 @@ public class ServiceMonitor {
 
     @Around("target(com.epam.mentorship.spring.mvc.service.MentorshipProgramService) && execution(void saveMentorshipProgram(com.epam.mentorship.spring.mvc.model.MentorshipProgram))&& args(mp)")
     public Object fillAutoModifiedFieldsForMentorshipProgram(ProceedingJoinPoint pjp, MentorshipProgram mp) throws Throwable {
-        ModifiedEmbed modifiedEmbed = mentorshipProgramService.getMentorsipProgramById(mp.getId()).getModifiedEmbed();
+        ModifiedEmbed modifiedEmbed = mp.getId() == null ? new ModifiedEmbed() : mentorshipProgramService.getMentorsipProgramById(mp.getId()).getModifiedEmbed();
         mp.setModifiedEmbed(applyAutoModification(modifiedEmbed));
         return pjp.proceed(new Object[] {mp});
     }
 
     @Around("target(com.epam.mentorship.spring.mvc.service.UserService) && execution(void saveUser(com.epam.mentorship.spring.mvc.model.User))&& args(user)")
     public Object fillAutoModifiedFieldsForUser(ProceedingJoinPoint pjp, User user) throws Throwable {
-        ModifiedEmbed modifiedEmbed = userService.getUserById(user.getId()).getModifiedEmbed();
+        ModifiedEmbed modifiedEmbed = user.getId() == null ? new ModifiedEmbed() : userService.getUserById(user.getId()).getModifiedEmbed();
         user.setModifiedEmbed(applyAutoModification(modifiedEmbed));
         return pjp.proceed(new Object[] {user});
     }
@@ -47,9 +48,12 @@ public class ServiceMonitor {
         }
         if (modifiedEmbed == null) {
             modifiedEmbed = new ModifiedEmbed();
+        }
+        if(modifiedEmbed.getCreatedByUser() == null || modifiedEmbed.getCreatedDate() == null) {
             modifiedEmbed.setCreatedDate(LocalDate.now());
             modifiedEmbed.setCreatedByUser(request.getRemoteAddr());
         }
+
         modifiedEmbed.setModifiedDate(LocalDate.now());
         modifiedEmbed.setModifiedByUser(request.getRemoteAddr()); //for now IP is used for user identification
 
